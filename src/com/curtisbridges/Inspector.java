@@ -180,20 +180,20 @@ public class Inspector implements Runnable {
         else if (itsclass == String.class) {
             fireFieldFound(itsclass, "", (object != null) ? object : "");
         }
-// else {
-// Field fields[] = itsclass.getFields();
-//
-// try {
-// for (int index = 0; index < fields.length; index++) {
-// Field field = fields[index];
-// final Object fieldValue = field.get(object);
-// processObject(object);
-// }
-// }
-// catch (Exception exc) {
-// System.out.println("Problem accessing field: " + exc.getMessage());
-// }
-// }
+        else {
+            Field fields[] = itsclass.getFields();
+
+            try {
+                for (int index = 0; index < fields.length; index++) {
+                    Field field = fields[index];
+                    final Object fieldValue = field.get(object);
+                    processObject(fieldValue);
+                }
+            }
+            catch (Exception exc) {
+                System.out.println("Problem accessing field: " + exc.getMessage());
+            }
+        }
     }
 
     public interface InspectorListener {

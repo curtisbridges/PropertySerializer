@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Properties;
 
 class PropertyListener implements Inspector.InspectorListener {
-    String       name;
-    Properties   props;
+    private String             name;
+    private final Properties   props;
 
-    boolean      isArray = false;
-    List<String> array;
-    String       arrayName;
+    private boolean            isArray = false;
+    private final List<String> array;
+    private String             arrayName;
 
     public PropertyListener() {
         props = new Properties();
@@ -39,9 +39,9 @@ class PropertyListener implements Inspector.InspectorListener {
 
     @Override
     public void fieldFound(Class<?> type, String name) {
-// String typeName = type.getName();
-// if (type == String.class)
-// typeName = "String";
+        String typeName = type.getName();
+        if (type == String.class)
+            typeName = "String";
 
         System.out.println("Field found: " + name + "(" + type + ")");
 
@@ -50,20 +50,19 @@ class PropertyListener implements Inspector.InspectorListener {
 
     @Override
     public void fieldFound(Class<?> type, String name, Object value) {
-        // String typeName = type.getName();
+        String typeName = type.getName();
 
         // type = convertType(type);
         // value = convertValue(value);
 
-        // if(type == String.class)
-        // typeName = "String";
+        if (type == String.class)
+            typeName = "String";
 
         if (value == null)
             value = "";
 
         String stringVal = value.toString();
-        // System.out.println("Field found: " + name + "(" + type + ") = " +
-// stringVal);
+        System.out.println("Field found: " + name + "(" + type + ") = " + stringVal);
         if (!isArray)
             props.put(name, stringVal);
         else
